@@ -93,7 +93,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void CheckForReadInput()
 {
-    if (Input.GetKeyDown(KeyCode.I))
+    if (Input.GetKeyDown(KeyCode.I) && !ShowBookContent.isReading)
     {
         Interactive selected = GetSelected();
         if (selected != null)

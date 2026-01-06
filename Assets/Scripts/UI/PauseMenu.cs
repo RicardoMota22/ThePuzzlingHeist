@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,7 @@ public class PauseMenu : MonoBehaviour
             if (isPaused)
                 Resume();
             else
+            ShowBookContent.isReading = true;
                 Pause();
         }
     }
@@ -30,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         isPaused = false;
+        ShowBookContent.isReading = false;
     }
 
     void Pause()
