@@ -19,6 +19,6 @@ MonoBehaviour:
   inventoryIcon: {fileID: 0}
   requirements:
   - {fileID: 11400000, guid: f6cb631d00f241340b3a2c93e7ab757e, type: 2}
-  requirementsMessage: Cant Leave without the crown
+  requirementsMessage: Can't leave without the crown
   interactionMessages:
   - Leave
