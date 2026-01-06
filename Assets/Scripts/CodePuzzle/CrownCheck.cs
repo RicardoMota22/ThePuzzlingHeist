@@ -4,6 +4,11 @@ using UnityEngine;
 public class CrownCheck : MonoBehaviour
 {
     [SerializeField] PlayerInventory playerInventory;
+    private CrownAcquiredSound crownAcquiredSound;
+    void Awake()
+    {
+        crownAcquiredSound = GetComponent<CrownAcquiredSound>();
+    }
 
     void OnEnable()
     {
@@ -31,6 +36,7 @@ public class CrownCheck : MonoBehaviour
 
         if(crownInInventory)
         {
+            crownAcquiredSound.PlayCrownAcquiredSound();
             Interactive interactive = GetComponent<Interactive>();
             interactive.FulfillRequirements();
             interactive.TriggerIndirect();
