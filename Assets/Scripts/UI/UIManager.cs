@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int        _interactionCrosshairScale;
     [SerializeField] private Color      _unselectedSlotColor;
     [SerializeField] private Color      _selectedSlotColor;
-    
+
     private TextMeshProUGUI _interactionMessage;
     private Image[]         _inventorySlots;
     private Image[]         _inventoryIcons;

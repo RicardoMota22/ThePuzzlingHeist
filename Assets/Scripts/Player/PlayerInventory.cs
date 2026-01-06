@@ -27,8 +27,10 @@ public class PlayerInventory : MonoBehaviour
         _uiManager.ShowInventoryIcon(_inventory.Count - 1, item.inventoryIcon);
 
         if (_selectedSlotIndex == -1)
+        {
             SelectInventorySlot(0);
-            OnAnyItemAdded?.Invoke(this);
+        }
+        OnAnyItemAdded?.Invoke(this);
     }
 
     public void Remove(Interactive item)

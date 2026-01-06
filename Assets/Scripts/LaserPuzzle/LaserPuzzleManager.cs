@@ -11,6 +11,17 @@ public class LaserPuzzleManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L))
+        {
+            for(int i = 0; i < configuration.Length; i++)
+            {
+                configuration[i].GetComponent<ButtonState>().ButtonSetting = correctConfiguration[i];
+            }
+            CheckConfiguration(null);
+        }
+    }
 
     void OnEnable()
     {

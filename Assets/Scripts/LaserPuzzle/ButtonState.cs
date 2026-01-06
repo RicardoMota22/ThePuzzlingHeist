@@ -4,7 +4,14 @@ using UnityEngine;
 public class ButtonState : MonoBehaviour
 {
     [SerializeField][Range(0,7)] private int buttonSetting = 0;
-    public int ButtonSetting => buttonSetting;
+    public int ButtonSetting
+    {
+        get {return buttonSetting;}
+        set
+        {
+            buttonSetting = value;
+        }
+    }
     public static event Action<ButtonState> OnAnyToggled;
     private MeshRenderer meshRenderer;
     void Awake()
