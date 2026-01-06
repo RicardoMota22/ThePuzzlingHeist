@@ -39,7 +39,7 @@ public class InteractionManager : MonoBehaviour
     private void Init()
     {
         _instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         _interactives = new List<Interactive>();
     }
