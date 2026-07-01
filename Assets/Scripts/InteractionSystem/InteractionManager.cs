@@ -4,7 +4,6 @@ using UnityEngine;
 public class InteractionManager : MonoBehaviour
 {
     private static InteractionManager _instance;
-
     public static InteractionManager instance
     {
         get

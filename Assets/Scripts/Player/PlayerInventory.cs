@@ -13,11 +13,15 @@ public class PlayerInventory : MonoBehaviour
 
     public static event Action<PlayerInventory> OnAnyItemAdded;
 
+    private PlayerControls _controls;
+
     void Start()
     {
         _playerInteraction  = GetComponent<PlayerInteraction>();
         _inventory          = new List<Interactive>();
         _selectedSlotIndex  = -1;
+
+        _controls = PlayerInputHandler.Instance.Controls;
     }
 
     public void Add(Interactive item)
@@ -88,14 +92,27 @@ public class PlayerInventory : MonoBehaviour
 
     private void CheckForPlayerSlotSelection()
     {
+        if (_controls.Player.InventoryNext.WasPressedThisFrame())
+        {
+            int next = (_selectedSlotIndex + 1) % _inventory.Count;
+            SelectInventorySlot(next);
+        }
+
+        if (_controls.Player.InventoryPrevious.WasPressedThisFrame())
+        {
+            int prev = (_selectedSlotIndex - 1 + _inventory.Count) % _inventory.Count;
+            SelectInventorySlot(prev);
+        }
+        /*
         for (int i = 0; i < _inventory.Count; ++i)
             if (Input.GetKeyDown(KeyCode.Alpha1 + i) && i != _selectedSlotIndex)
                 SelectInventorySlot(i);
+        */
     }
 
     private void CheckForReadInput()
 {
-    if (Input.GetKeyDown(KeyCode.I) && !ShowBookContent.isReading)
+    if (/*Input.GetKeyDown(KeyCode.I)*/_controls.Player.Read.WasPressedThisFrame() && !ShowBookContent.isReading)
     {
         Interactive selected = GetSelected();
         if (selected != null)

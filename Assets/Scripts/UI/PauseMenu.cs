@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject quitConfirmUI;
 
     private bool isPaused = false;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button quitYesButton;
+    private PlayerControls _controls;
 
     void Awake()
     {
@@ -15,9 +20,13 @@ public class PauseMenu : MonoBehaviour
         quitConfirmUI.SetActive(false);
     }
 
+    void Start()
+    {
+        _controls = PlayerInputHandler.Instance.Controls;
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (/*Input.GetKeyDown(KeyCode.Escape)*/_controls.Player.Pause.WasPressedThisFrame())
         {
             if(quitConfirmUI.activeSelf)
             {
@@ -52,6 +61,8 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+
         quitConfirmUI.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -63,6 +74,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         quitConfirmUI.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(quitYesButton.gameObject);
     }
 
     public void ConfirmQuit()
@@ -74,6 +87,9 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         quitConfirmUI.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+
         isPaused = true;
     }
 }

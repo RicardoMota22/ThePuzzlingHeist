@@ -73,7 +73,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void CheckForPlayerInteraction()
     {
-        if (Input.GetButtonDown("Interact") && _currentInteractive != null)
+        if (/*Input.GetButtonDown("Interact")*/PlayerInputHandler.Instance.Controls.Player.Interact.triggered 
+        && _currentInteractive != null)
         {
             _currentInteractive.Interact();
             _refreshCurrentInteractive = true;

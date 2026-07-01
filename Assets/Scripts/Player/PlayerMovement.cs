@@ -19,6 +19,25 @@ public class PlayerMovement : MonoBehaviour
     private Vector3             _motion;
     private bool                _jump;
 
+    private PlayerControls _controls;
+    private Vector2 _moveInput;
+    private Vector2 _lookInput;
+
+    private void Awake()
+    {
+        _controls = new PlayerControls();
+    }
+
+    private void OnEnable()
+    {
+        _controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _controls.Disable();
+    }
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -36,7 +55,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateRotation()
     {
-        float rotation = Input.GetAxis("Mouse X");
+        //float rotation = Input.GetAxis("Mouse X");
+
+        _lookInput = _controls.Player.Look.ReadValue<Vector2>();
+
+        float rotation = _lookInput.x * Time.deltaTime * 150f;
 
         transform.Rotate(0f, rotation, 0f);
     }
@@ -45,7 +68,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _headRotation = _head.localEulerAngles;
 
-        _headRotation.x -= Input.GetAxis("Mouse Y");
+        //_headRotation.x -= Input.GetAxis("Mouse Y");
+
+        _headRotation.x -= _lookInput.y * Time.deltaTime * 150f;
 
         if (_headRotation.x > 180f)
             _headRotation.x = Mathf.Max(_maxLookUpAngle, _headRotation.x);
@@ -72,8 +97,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateVelocityHor()
     {
+        /*
         float forwardAxis   = Input.GetAxis("Forward");
         float strafeAxis    = Input.GetAxis("Strafe");
+        */
+
+        _moveInput = _controls.Player.Move.ReadValue<Vector2>();
+
+        float forwardAxis = _moveInput.y;
+        float strafeAxis = _moveInput.x;
 
         if (forwardAxis >= 0f)
             _velocityHor.z = forwardAxis * _maxForwardSpeed;

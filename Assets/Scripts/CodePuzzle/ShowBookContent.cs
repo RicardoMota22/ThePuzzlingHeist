@@ -31,7 +31,8 @@ public class ShowBookContent : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButtonDown("Interact") && bookOpen)
+        if(/*Input.GetButtonDown("Interact")*/PlayerInputHandler.Instance.Controls.Player.Interact.triggered 
+        && bookOpen)
         {
             audioSource.PlayOneShot(closeBook);
             bookContent.SetActive(false);

@@ -20,7 +20,8 @@ public class ShowCameraDiagram : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButtonDown("Interact") && diagramOpen)
+        if(/*Input.GetButtonDown("Interact")*/PlayerInputHandler.Instance.Controls.Player.Interact.triggered 
+        && diagramOpen)
         {
             ShowBookContent.isReading = false;
             cameraDiagram.SetActive(false);

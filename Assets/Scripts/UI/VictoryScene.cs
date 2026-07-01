@@ -7,7 +7,7 @@ public class VictoryScene : MonoBehaviour
 
     void Update()
     {
-        if(Input.anyKeyDown)
+        if(/*Input.anyKeyDown*/PlayerInputHandler.Instance.Controls.Player.Interact.WasPressedThisFrame())
         {
             SceneManager.LoadScene(mainMenuScene);
         }
