@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
         _lookInput = _controls.Player.Look.ReadValue<Vector2>();
 
-        float rotation = _lookInput.x * Time.deltaTime * 150f;
+        float rotation = _lookInput.x * Time.deltaTime /** 150f*/;
 
         transform.Rotate(0f, rotation, 0f);
     }
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
         //_headRotation.x -= Input.GetAxis("Mouse Y");
 
-        _headRotation.x -= _lookInput.y * Time.deltaTime * 150f;
+        _headRotation.x -= _lookInput.y * Time.deltaTime /** 150f*/;
 
         if (_headRotation.x > 180f)
             _headRotation.x = Mathf.Max(_maxLookUpAngle, _headRotation.x);
